@@ -48,7 +48,7 @@ namespace LibraryModel
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -57,6 +57,7 @@ namespace LibraryModel
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                     endpoints.MapHub<ChatHub>("/chathub");
+                    endpoints.MapRazorPages();
             });
         }
     }
