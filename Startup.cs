@@ -11,7 +11,7 @@ using Microsoft.Extensions.Hosting;
 using LibraryModel.Data;
 using Microsoft.EntityFrameworkCore;
 using LibraryModel.Models;
-
+using Buteanu_Andrei_Lab2.Hubs;
 namespace LibraryModel
 {
     public class Startup
@@ -28,6 +28,7 @@ namespace LibraryModel
         {
             services.AddControllersWithViews();
             services.AddDbContext<LibraryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +56,7 @@ namespace LibraryModel
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapHub<ChatHub>("/chathub");
             });
         }
     }
